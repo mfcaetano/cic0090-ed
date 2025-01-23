@@ -15,16 +15,16 @@ int main(){
 	print_list(lt);
 
 
-	printf("\n\nOrdenação Alfabética\n");
-	bubble_sort(lt, alpha_key);
+	printf("\n\nOrdenação Por Nome\n");
+	bubble_sort(lt, name_key);
 
-	printf("\nLista Ordenada!\n");
+	printf("\nLista Ordenada por Nome!\n");
 	print_list(lt);
 
-	printf("\n\nOrdenação Idade\n");
+	printf("\n\nOrdenação por Idade\n");
 	bubble_sort(lt, age_key);
 
-	printf("\nLista Ordenada!\n");
+	printf("\nLista Ordenada por Idade!\n");
 	print_list(lt);
 
 	free_list(lt);

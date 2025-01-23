@@ -5,7 +5,7 @@
 #include "student.h"
 #include "list.h"
 
-int alpha_key(Student* st1, Student* st2);
+int name_key(Student* st1, Student* st2);
 int age_key(Student* st1, Student* st2);	
 
 
