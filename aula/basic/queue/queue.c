@@ -39,6 +39,7 @@ int dequeue(Queue* q){
 
     Node* aux = q->begin;
     int item = aux->item;
+    q->size--;
 
     q->begin = q->begin->next;
     free(aux);
