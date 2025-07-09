@@ -4,7 +4,15 @@
     "string_view": "c",
     "format": "c",
     "initializer_list": "c",
-    "span": "c"
+    "span": "c",
+    "cstdlib": "c",
+    "string": "c",
+    "vector": "c",
+    "functional": "c",
+    "limits": "c",
+    "ostream": "c",
+    "streambuf": "c",
+    "tuple": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
