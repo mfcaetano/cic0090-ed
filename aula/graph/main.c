@@ -1,20 +1,21 @@
+#include "graph.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "graph.h"
 
+int main(){
 
-int main(void) {
+  Graph* graph = create_graph(10);
+  
+  free_graph(graph);
 
-    Graph* graph = create_graph(10);
-
-    for (int i = 0; i < 7; i++) {
-        if(!add_vertex(graph, create_vertex(i))) {
-            printf("Failed to add vertex %d\n", i);
-            exit(1);
-        }
-    }
-
+  for (int i = 0; i < 7; i++) {
+      if(!add_vertex(graph, create_vertex(i))) {
+          printf("Failed to add vertex %d\n", i);
+          exit(1);
+      }
+  }
+/*
     add_edge(graph, 0, 1, 5);
     add_edge(graph, 0, 5, 2);
     add_edge(graph, 1, 2, 4);
@@ -35,8 +36,8 @@ int main(void) {
     print_graph(graph);
 
     free_graph(graph);
-
-    graph = create_graph(7);
+*/
+    /*graph = create_graph(7);
 
     for (int i = 0; i < 7; i++) {
         if(!add_vertex(graph, create_vertex(i))) {
@@ -60,8 +61,6 @@ int main(void) {
     printf("\n\nDFS: \n");
     print_graph(graph);
 
-    free_graph(graph);
-
-
-    return 0;
+    free_graph(graph);*/
+    
 }

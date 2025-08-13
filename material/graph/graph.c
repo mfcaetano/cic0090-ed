@@ -40,6 +40,9 @@ void breadth_first_search(struct vertex* start) {
 
         current->color = BLACK;
     }//end while
+    
+    free_queue(queue);
+    
 }//end breadth_first_search()
 
 
