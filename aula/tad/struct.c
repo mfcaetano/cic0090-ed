@@ -28,7 +28,7 @@ int main(){
 
 void ler_aluno(str_aluno* aluno){
   printf("Informe nome:\n");
-  scanf("%[^\n]", (*aluno).nome);
+  scanf("%[^\n]", &(*aluno).nome);
   
   printf("Informe nota: \n");
   scanf("%f", &aluno->n1);
