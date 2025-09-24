@@ -5,7 +5,7 @@
 
 typedef struct str_aluno {
   char *nome;
-  float *n1;
+  float *notas;
 } str_aluno;
 
 
@@ -24,7 +24,7 @@ int main(){
   
   pt_aluno = cria_aluno(buff_nome, &buff_nota);
   
-  printf("Nome: %s nota: %.2f\n", pt_aluno->nome, *pt_aluno->n1);
+  printf("Nome: %s nota: %.2f\n", pt_aluno->nome, *pt_aluno->notas);
   
   libera_aluno(pt_aluno);
 
@@ -34,7 +34,7 @@ int main(){
 void libera_aluno(str_aluno* aluno){
 
   free(aluno->nome);
-  free(aluno->n1);
+  free(aluno->notas);
   free(aluno);
 }
 
@@ -63,9 +63,9 @@ str_aluno * cria_aluno(char* pt_nome, float* pt_n1){
     exit(1);
   }
   
-  pt_aluno->n1 = (float *) malloc(sizeof(float)); 
+  pt_aluno->notas = (float *) malloc(sizeof(float)); 
   
-  if(!pt_aluno->n1){
+  if(!pt_aluno->notas){
     printf("Não foi possível alocar memória para aluno->n1\n");
     free(pt_aluno->nome);
     free(pt_aluno);
@@ -73,7 +73,7 @@ str_aluno * cria_aluno(char* pt_nome, float* pt_n1){
   }
   
   strcpy(pt_aluno->nome, pt_nome); 
-  *(*pt_aluno).n1 = *pt_n1;
+  *(*pt_aluno).notas = *pt_n1;
   
   return pt_aluno;
   
