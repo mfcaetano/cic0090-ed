@@ -45,8 +45,42 @@ void imprime_lista(Lista* lista);
 
 int main(){
   Lista* lista = cria_lista();
+    
+  add(lista, cria_aluno("Ana", 1));
+  add(lista, cria_aluno("Caetano", 2));
+  append(lista, cria_aluno("Paula", 3));
   
+  imprime_lista(lista);
+    
+  libera_lista(lista);
   
+
+
+/*    char buff_nome[200];
+    int telefone;
+    int qt_alunos;
+    Lista* lista = cria_lista();
+    
+    printf("Informe a quantidade de alunos para cadastro: \n");
+    scanf("%d", &qt_alunos);
+    getchar();
+    
+    for(int i = 0; i < qt_alunos;i++){
+        printf("Informe o nome[%d]\n", i+1);
+        scanf("%[^\n]s", buff_nome);
+        
+        printf("Informe o telefone[%d]\n", i+1);
+        scanf("%d", &telefone);
+        getchar();
+        
+        add(lista, cria_aluno(buff_nome, telefone));
+    }
+  
+    imprime_lista(lista);
+    
+    libera_lista(lista);
+  
+*/
 
 }//end main()
 
@@ -95,9 +129,20 @@ Aluno* cria_aluno(const char* nome, int fone){
 }//end cria_aluno
 
 void libera_lista(Lista* lista){
-}
+  No* atual = lista->primeiro;
+  
+  while(atual){
+    lista->primeiro = lista->primeiro->proximo;
+    libera_no(atual);
+    atual = lista->primeiro;
+  }
+  
+  free(lista);
+}//end libera_lista()
 
 void libera_no(No* no){
+  free(no->aluno);
+  free(no);
 }
 
 void imprime_lista(Lista* lista) {
@@ -109,11 +154,44 @@ void imprime_lista(Lista* lista) {
     No* atual = lista->primeiro;
     int idx = 0;
     while (atual) {
-        printf("  [%d] %s - %s\n", idx, atual->aluno->nome, atual->aluno->fone);
+        printf("  [%d] %s - %d\n", idx, atual->aluno->nome, atual->aluno->fone);
         atual = atual->proximo;
         idx++;
     }
 }
+
+
+// push front
+void add(Lista* lista, Aluno* aluno){
+    No* no = cria_no(aluno);
+    
+    no->proximo = lista->primeiro;
+    lista->primeiro = no; 
+    lista->tamanho++;
+}//end add
+
+
+// push back
+void append(Lista* lista, Aluno* aluno){
+    No* no_novo = cria_no(aluno);
+    
+    //se a lista for vazia
+    if(!lista->primeiro){
+        lista->primeiro = no_novo;
+    }else{
+        No * atual = lista->primeiro;
+
+        //enquanto atual tiver um enderećo válido
+        while(atual->proximo){
+            atual = atual->proximo;
+        }
+        
+        atual->proximo = no_novo;  
+    }//end if
+    
+    lista->tamanho++;
+    
+}//end append
 
 
 
