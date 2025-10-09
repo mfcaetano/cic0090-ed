@@ -39,6 +39,10 @@ int is_empty(Lista* lista);
 // remove at position [0..tamanho-1], return the removed Aluno*
 Aluno* pop(Lista* lista, int pos);
 
+// search by nome; returns Aluno* or NULL
+Aluno* search(Lista* lista, char* chave);
+
+
 // print list
 void imprime_lista(Lista* lista);
 
@@ -49,10 +53,39 @@ int main(){
   add(lista, cria_aluno("Ana", 1));
   add(lista, cria_aluno("Caetano", 2));
   append(lista, cria_aluno("Paula", 3));
+  append(lista, cria_aluno("Maria Jose", 4));
   
   imprime_lista(lista);
+  
+  int i = 2;
+  
+  Aluno* aluno = pop(lista, i);
+  
+  if(!aluno){
+    libera_lista(lista);
+    printf("Não foi possível remover aluno na posićão %d \n", i);
+    exit(1);
+  }
+  
+  printf("Aluno removido - nome %s - telefone: %d \n", aluno->nome, aluno->fone);
+  
+  free(aluno);
+  
+  
+  aluno = search(lista, "Caetano");
+  if(!aluno){
+    libera_lista(lista);
+    printf("Não foi possíve encontrar a chave: Caetano\n");
+    exit(1);
+  }
+  
+  printf("Aluno encontrado - nome %s - telefone: %d \n", aluno->nome, aluno->fone);
+  
+  imprime_lista(lista);
+  
     
   libera_lista(lista);
+
   
 
 
@@ -83,6 +116,40 @@ int main(){
 */
 
 }//end main()
+
+// remove at position [0..tamanho-1], return the removed Aluno*
+Aluno* pop(Lista* lista, int pos){
+
+  if(!lista || pos < 0 || pos >= lista->tamanho)
+    return NULL;
+    
+  No* removido;
+  Aluno* aluno;
+  
+  if(pos == 0){
+    removido = lista->primeiro;
+    lista->primeiro = lista->primeiro->proximo;
+  }else {  
+    No* atual = lista->primeiro;
+    int i = 0;
+    
+    while(i < pos - 1 && atual){
+      atual = atual->proximo;
+      i++;
+    }//end while
+    
+    if(!atual || !atual->proximo) return NULL;
+    
+    removido = atual->proximo;
+    atual->proximo = removido->proximo;
+  }//end if
+  
+  aluno = removido->aluno;
+  free(removido);
+  lista->tamanho--;
+  return aluno;
+}//end pop()
+
 
 
 Lista* cria_lista(void){
@@ -159,6 +226,24 @@ void imprime_lista(Lista* lista) {
         idx++;
     }
 }
+
+
+// search by nome; returns Aluno* or NULL
+Aluno* search(Lista* lista, char* chave){
+  if(!lista || !chave) return NULL;
+  
+  No* atual = lista->primeiro;
+  
+  while(atual){
+    if(strcmp(atual->aluno->nome, chave) == 0){
+      return atual->aluno;
+    }
+    
+    atual = atual->proximo;
+  }//end while
+  
+  return NULL;
+}//end search
 
 
 // push front
