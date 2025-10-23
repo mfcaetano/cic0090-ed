@@ -43,7 +43,6 @@ void enqueue(Queue* q, int item) {
         q->end = novo;
     }
     q->size++;
-    printf("Elemento %d adicionado à fila.\n", item);
 }
 
 // Remove o elemento do início da fila e retorna seu valor
