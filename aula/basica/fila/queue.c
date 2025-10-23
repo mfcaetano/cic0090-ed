@@ -1,5 +1,6 @@
 #include "queue.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 Queue * create_queue(){
     Queue* q = (Queue *) malloc(sizeof(Queue));
@@ -47,6 +48,7 @@ void enqueue(Queue* q, int item){
 int dequeue(Queue* q){
     if (is_empty(q)){
         printf("Fila vazia. \n");
+        free_queue(q);
         exit(1);
     }
     
@@ -64,13 +66,43 @@ int dequeue(Queue* q){
 }
 
 int front(Queue* q){
-}
+    if(is_empty(q)){
+        printf("Fila vazia!\n");
+        free_queue(q);
+        exit(1);
+    }
+    
+    return q->begin->item;
+}//end front()
+
 
 void print_queue(Queue* q){
-}
+    if(is_empty(q)){
+        printf("Fila vazia!\n");
+        return;
+    }
+    
+    Node* atual = q->begin;
+    printf("Fila: ");
+    
+    while(atual){
+      printf("%d ", atual->item);
+      
+      atual = atual->next;
+    }//end while
+    
+    printf("\n");
+}//end print_queue()
 
 void free_queue(Queue* q){
-}
+    if(!q)
+      return;
+
+    while(!is_empty(q))
+        dequeue(q);
+          
+    free(q);
+}//end free_queue()
 
 int is_empty(Queue* q){
   return (q->size == 0);
